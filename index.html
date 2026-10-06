@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Happy Birthday Baby K!</title>
+<style>
+:root{--bg:#ffe4ec;--card:#fff;--ink:#5a1f3a;--pink:#ff5c93;--soft:#ffd0e0;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#2a1020;--card:#3a1830;--ink:#ffe4ec;--pink:#ff6fa3;--soft:#5a2748}}
+:root[data-theme="dark"]{--bg:#2a1020;--card:#3a1830;--ink:#ffe4ec;--pink:#ff6fa3;--soft:#5a2748}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--ink);font-family:ui-rounded,"Segoe UI",system-ui,sans-serif;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:16px}
+.card{background:var(--card);border-radius:28px;padding:32px 24px;max-width:420px;width:100%;text-align:center;box-shadow:0 10px 40px rgba(255,92,147,.25)}
+.emoji{font-size:56px}
+h1{font-size:26px;margin:12px 0 8px}
+p{font-size:20px;margin:0 0 28px}
+.btns{display:flex;gap:16px;justify-content:center;align-items:center;min-height:60px}
+button{font:inherit;font-size:20px;font-weight:700;border:0;border-radius:999px;padding:14px 32px;cursor:pointer}
+#yes{background:var(--pink);color:#fff}
+#no{background:var(--soft);color:var(--ink);transition:left .15s,top .15s}
+.heart{position:fixed;top:-30px;font-size:28px;animation:fall 3s linear forwards;pointer-events:none}
+@keyframes fall{to{transform:translateY(110vh) rotate(360deg)}}
+</style>
+</head>
+<body>
+<div class="card" id="card">
+  <div class="emoji">🎂</div>
+  <h1>Happy Birthday Baby K!</h1>
+  <p id="q">Do you feel cute today?</p>
+  <div class="btns" id="btns">
+    <button id="yes">Yes 💖</button>
+    <button id="no">No</button>
+  </div>
+</div>
+<script>
+var no=document.getElementById('no'),yes=document.getElementById('yes');
+function jump(e){
+  if(e){e.preventDefault();e.stopPropagation();}
+  var w=window.innerWidth,h=window.innerHeight,r=no.getBoundingClientRect();
+  var bw=r.width||90,bh=r.height||50,m=12;
+  var x=m+Math.random()*(w-bw-2*m),y=m+Math.random()*(h-bh-2*m);
+  no.style.position='fixed';no.style.left=x+'px';no.style.top=y+'px';
+}
+['mouseover','pointerdown','touchstart','click','focus'].forEach(function(ev){no.addEventListener(ev,jump,{passive:false});});
+yes.addEventListener('click',function(){
+  document.getElementById('q').textContent='I knew it! You look amazing 😍';
+  document.getElementById('btns').innerHTML='<div class="emoji">🥳💕🎉</div>';
+  no.remove();
+  for(var i=0;i<40;i++){(function(i){setTimeout(function(){
+    var s=document.createElement('div');s.className='heart';
+    s.textContent=['💖','💕','🎈','✨','🎉'][i%5];
+    s.style.left=Math.random()*100+'vw';
+    document.body.appendChild(s);setTimeout(function(){s.remove();},3200);
+  },i*80);})(i);}
+});
+</script>
+</body>
+</html>
